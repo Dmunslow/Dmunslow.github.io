@@ -15,23 +15,22 @@
 # in the templates via {{ site.myvariable }}.
 title: Виктория Капитоненко
 description: > # this means to ignore newlines until "baseurl:"
-  Блог Виктории Капитоненко. Нужен для сохранения информации, полезной лично для меня, но которая обычно забывается.<br>
-  Сайт написан на Jekyll и использует GitHub Pages.<br>
-  Блог с открытым исходным кодом размещен на <a href="//github.com/ViKapitoshka/blog">github</a>.<br>
+  This is my personal blog, where I share side projects that I've worked on, mostly in R.<br>
+  You can find the code for all of these projects (as well as the code for this blog!) on my <a href="//github.com/Dmunslow/">github</a>.<br>
   Патчи, предложения и комментарии приветствуются.<br>
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://blog.kaptn.ru" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://blog.duncanmunslow.com" # the base hostname & protocol for your site, e.g. http://example.com
 
 
 author:
-  name: 'Viktoriya Kapitonenko'
-  last_name: 'Kapitonenko'
-  cv: '//kaptn.ru'
+  name: 'Duncan Munslow'
+  last_name: 'Munslow'
+  cv: '//duncanmunslow.com'
   avatar: '/images/avatar.jpeg'
-  github_username:  ViKapitoshka  
-  email: vika@kaptn.ru
-  vk_id: id201664979
-  telegram_name: vikapitoshka 
+  github_username:  Dmunslow  
+  email: dmunslow11@gmail.com
+  vk_id:
+  telegram_name:  
   logo: '/images/logo.svg'
 
 # Build settings
