@@ -13,11 +13,11 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Виктория Капитоненко
+title: About this site
 description: > # this means to ignore newlines until "baseurl:"
-  This is my personal blog, where I share side projects that I've worked on, mostly in R.<br>
-  You can find the code for all of these projects (as well as the code for this blog!) on my <a href="//github.com/Dmunslow/">github</a>.<br>
-  Патчи, предложения и комментарии приветствуются.<br>
+  This is my personal blog, where I share side projects that I've worked on, mostly in R, but also some basic projects in python.<br>
+  You can find the code for all of these projects on my <a href="//github.com/Dmunslow/">github</a>.<br>
+  <br>
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blog.duncanmunslow.com" # the base hostname & protocol for your site, e.g. http://example.com
 
