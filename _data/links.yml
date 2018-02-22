@@ -1,9 +1,10 @@
 # blog page sections
-- name: JavaScript
-  href: '/javascript/'
-
+- name: R
+  href: '/ r /'
+  
+- name: Python
+  href: '/python/'
+  
 - name: Life
   href: '/life/'
 
-- name: Codecademy
-  href: '/codecademy/'
