@@ -188,7 +188,7 @@ The confusionMatrix command in the caret package allows us to see the accuracy o
 
 ------------------------------------------------------------------------
 
-### Random Forrest Out of Sample Accuracy
+### Random Forest Out of Sample Accuracy
 
 ------------------------------------------------------------------------
 
@@ -234,7 +234,7 @@ confusionMatrix(table(rfPredict, testing$classe))
 
 ------------------------------------------------------------------------
 
-The out of sample accuracy for Random Forrest is 99.27%, is actually *higher* than the training data, which is a surprising, yet encouraging result. Next we will train a boosting model, again using the caret package.
+The out of sample accuracy for random forest is 99.27%, is actually *higher* than the training data, which is a surprising, yet encouraging result. Next we will train a boosting model, again using the caret package.
 
 4. Generalized Boosting Model - GBM
 -----------------------------------
