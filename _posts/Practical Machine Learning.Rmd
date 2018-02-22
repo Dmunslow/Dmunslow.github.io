@@ -1,0 +1,395 @@
+---
+title: " Johns Hopkins Practical Machine Learning Course Project"
+author: "Duncan Munslow"
+date: "February 21, 2018"
+output: 
+    md_document:
+        variant: markdown_github
+        toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, message=FALSE}
+library(caret)
+library(parallel)
+library(doParallel)
+```
+
+### Introduction
+
+This is a write-up for the course project for the 
+[Johns Hopkins Practical Machine Learning MOOC on Coursera](https://www.coursera.org/learn/practical-machine-learning), 
+which I completed in May of 2017.  Since most of the heavy-lifting was already done, 
+I chose this to be the inaugural post on my blog (work smarter, not harder).  
+  
+The data set for this project is excercise data. For the project, 
+I was tasked with building a model to predict whether or not an excercise was properly peformed,
+based on accelerometer data placed on the subjects. For anyone interested in following along,
+you can dowload both files by following these links : [training](https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv),
+[testing](https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv) - 
+Note - this data set was used as a quiz for the course, and participants were required to score 20/20 to pass.  
+
+### Methodology 
+
+For my project, I chose to train a random forest model, a boosting model,  
+and a stacked ensemble model composed of the 2 afformentioned models. 
+I used the caret package in R to train all of the models.  
+
+I chose to split my training data
+set into both a testing and validation data set, which is necessary for the ensemble model, 
+to avoid issues due to over-fitting.  
+
+Additionally, I used the doParrallel package, which allows parallel processing in R on Windows machines,
+in order to speed up the training of my models.  
+
+
+## 1. Reading and Processing data
+```{r downloadFiles, echo=F, cache=T, message=FALSE, warning=FALSE}
+trainURL <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+testURL <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+
+if(!file.exists("./train.csv")){
+    download.file(trainURL, "./train.csv")
+}
+
+if(!file.exists("./test.csv")){
+    download.file(testURL, "./test.csv")
+}
+rm(trainURL)
+rm(testURL)
+
+```
+
+```{r readFiles, echo= F, cache=TRUE}
+# Read in data
+data <- read.csv("./train.csv", header = T, row.names = 1)
+
+quiz <- read.csv("./test.csv", header = T, row.names = 1)
+
+```
+
+### Remove Missing Values
+
+A quick inspection of the quiz data reveals numerous columns comprised of only NA values.  
+Although it is possible to impute these values, for simplicity's sake, I removed columns from both data sets where 
+the quiz data had more than 90% missing values for that column.  
+  
+Additionally, the first 6 columns in each data set contain information which is irrelevant to the quality of the excercise,
+so I will remove those features as well:  
+
+---
+
+```{r featureSelection, cache= T}
+# Remove columns (from full data set) with more than 90% missing values in quiz set
+training_subset <- data[, colSums(is.na(quiz)) < nrow(quiz) * .90]
+
+# For consistency sake, remove same columns from the quiz data
+quiz_subset <- quiz[, colSums(is.na(quiz)) < nrow(quiz) * .90]
+
+## remove columns that are not relevent to excercise quality
+training_subset <- training_subset[,-(1:6)]
+quiz_subset <- quiz_subset[,-(1:6)]
+
+## check that column dimensions of data sets match
+dim(training_subset)
+dim(quiz_subset)
+```
+
+---
+
+Encouragingly, both data sets have the same number of columns. 
+
+
+### Identify and eliminate highly correlated variables
+
+It is important to identify and remove highly correlated variables in a data set, 
+as including highly correlated variables in models can cause accuracy issues. 
+Luckily, the caret package has a function, findCorrelation, which make identifying 
+and removing these columns very easy.  I chose to set the correlation
+cutoff at .9.  I will use the training data to identify highly correlated variables, 
+since the sample size is much larger than the quiz data.
+
+---
+
+```{r corr, cache = TRUE}
+# create a correlation matrix 
+corMatrix <- cor(training_subset[,-53])
+
+# Create index with columns with high (>0.9) correlation
+highCor <- findCorrelation(corMatrix, 0.9)
+
+# Remove columns with correlation higher than .9 for both data sets
+training_subset <- training_subset[, -highCor]
+quiz_subset <- quiz_subset[,-highCor]
+
+```
+
+---
+
+## 2. Subsetting Train/Test/Validation sets
+
+Using the caret package, I will subset my training data set into three parts:
+
+* training - the data used to train the models  
+
+* testing - the data used to predict the out of sample accuracy for the individual models, 
+and to create predictions for the ensemble model  
+
+* validation - the data used to predict the out of sample accuracy for the stacked ensemble model  
+
+
+Note that for the data partitioning, I "set the seed", so that these results are reproducible.  
+
+---
+
+```{r data_subsetset , cache = TRUE}
+
+set.seed(808)
+# subset data into validation and build subsets
+inBuild <-createDataPartition(y = training_subset$classe, p = 0.7, list = F)
+
+validation <- training_subset[-inBuild,]
+buildData <- training_subset[inBuild,]
+
+set.seed(818)
+# Subset build data into train and test sets
+inTrain <- createDataPartition(y = buildData$classe, p = 0.7, list = F)
+
+training <- buildData[inTrain,]
+testing <- buildData[-inTrain,]
+
+```
+
+---
+
+With the data separated into the appropriate sets, its time to train the models!
+
+---
+
+
+## A note on Parallel Processing
+
+In order to speed up the training of the models, I will utilize the the parallel and doParallel packages
+in R, which allow you to utilize multiple cores in training your models.  Note that this process differs for Mac, 
+so if you are working on that platform, you will want to consult other sources if you want to use parallel processing.  
+
+Before each I run each model (after having loaded both packages), I include the following lines of code:
+
+```{r startParallel, echo = TRUE, eval=FALSE}
+# Initiate Parallel Processing 
+cluster <- makeCluster(detectCores() - 1) # convention to leave 1 core for OS
+registerDoParallel(cluster)
+
+```
+
+After the code for the model, you will want to run the following lines, to stop the parallel processing.
+
+```{r endParallel, echo = TRUE, eval= FALSE}
+stopCluster(cluster)
+registerDoSEQ()
+```
+
+
+## 3. Random Forest
+
+
+```{r rfSetup, echo = FALSE}
+
+# Setup Parallel Processing 
+cluster <- makeCluster(detectCores() - 1) # convention to leave 1 core for OS
+registerDoParallel(cluster)
+
+```
+
+
+Although caret allows you to tune your models with various different paremeters,
+for this project I left all of the settings to default.
+For those interest in learning about the tuning parameters in caret, and I've found 
+[this paper](https://www.jstatsoft.org/article/view/v028i05/v28i05.pdf) by Max Khun 
+to be especially helpful in understanding some of the basic tuning
+paremeters for different types of models.
+
+---
+
+```{r rfModel, cache = T}
+
+# set seed for reproducibility
+set.seed(828)
+rfMod <- train(classe~., data = training, method="rf")
+
+## test in-sample accuracy of model predictions
+confusionMatrix(rfMod)
+```
+
+```{r endParRF, echo = F}
+stopCluster(cluster)
+registerDoSEQ()
+```
+
+---
+
+### Random Forest Training Data Accuracy
+
+---
+
+The confusionMatrix command in the caret package allows us to see the accuracy of the newly trained model.
+We can see that the in sample accuracy for Random forest was 98.21%. While this is highly-accurate, 
+we need to test the model on data that it was not trained on to get a realistic estimation
+of it's performance on the quiz data.  This can also be done with the test data set, 
+and confusionMatrix command in caret:
+
+---
+
+### Random Forrest Out of Sample Accuracy
+
+---
+
+```{r rfTest, cache = T}
+# create list of prediction values on the testing set
+rfPredict <- predict(rfMod, testing)
+
+# pass table of prediction values vs actual to confusionMatrix
+confusionMatrix(table(rfPredict, testing$classe))
+```
+
+---
+
+The out of sample accuracy for Random Forrest is 99.27%, is actually *higher* 
+than the training data, which is a surprising, yet encouraging result. 
+Next we will train a boosting model, again using the caret package.
+
+## 4. Generalized Boosting Model - GBM
+
+```{r gbmSetup, echo = F}
+cluster <- makeCluster(detectCores() - 1) # convention to leave 1 core for OS
+registerDoParallel(cluster)
+```
+---
+
+For my boosting model, I again chose to leave the tuning parameters to their default settings.
+
+---
+
+```{r gbmModel, cache = T}
+## Set seed, train model and save into gbmMod
+set.seed(838)
+gbmMod <- train(classe~., method = "gbm", data = training, verbose = F)
+
+## display accuracy of model on training data
+confusionMatrix(gbmMod)
+```
+
+### Boosting Model - Training Data Accuracy
+
+---
+
+The performance of the boosting model on the training data is nearly identical to random
+forest, only slightly better at 98.78%.  We again need to validate our results using the 
+testing data:
+
+```{r endParGBM, echo = F}
+stopCluster(cluster)
+registerDoSEQ()
+```
+
+### GBM Out of Sample Accuracy
+
+---
+
+```{r gbmTest, cache = T}
+## create list of preditions
+gbmPredict <- predict(gbmMod, testing)
+
+## use test-set predictions to create confusion matrix
+confusionMatrix(table(gbmPredict, testing$classe))
+```
+
+---
+
+The accuracy for the boosting model on the test set was 99.2%, which leaves both models
+tied in terms accuracy on the test data.  
+
+
+## 5. Stacked Ensemble model
+
+---
+
+The last model that I will train is a stacked ensemble model.  This model will take the predictions
+of the random forest model and the boosting model, and use only those predictions as features to 
+train on.  Practically speaking, this was definitely overkill for this project, but it was something
+I was very interested in trying.  :
+
+```{r comboModSetup, echo = F}
+cluster <- makeCluster(detectCores() - 1) # convention to leave 1 core for OS
+registerDoParallel(cluster)
+
+```
+
+### Creating Combined model
+
+---
+
+In order to train the model, I must first create the data set, using the predictions I 
+created on the test set from the models above.  I combine those with the actual values for the "classe" variable
+in the test set, and I have a data set which I can now train my ensemble model:
+
+```{r comboMod, cache = TRUE}
+
+# create data frame to stack boost/rf models, as well as the acual values of the "classe" variable
+combined <- data.frame(rfPredict, gbmPredict, classe = testing$classe)
+
+# Set seed an run random forest model using combined dataframe
+set.seed(848)
+comboMod <- train(classe~., method = "rf", data = combined, allowParallel = T)
+
+```
+```{r endParCombo, echo = F}
+stopCluster(cluster)
+registerDoSEQ()
+```
+
+### Predicting on Validation set with the Combined Model
+
+---
+
+Since the ensemble model was trained on predictions from our test set, we need to use a different 
+data set to predict the out of sample accuracy for the ensemble model.  As you may remember,
+I created the validation set above, which we will now use to validate the data.  
+  
+The key thing to remember with the ensemble model, is that it is not using the raw data set
+to predict the "classe" variable.  The ensemble model is using the predictions of our random forest
+and boosting models as features.  We therefore must first create a data frame of predictions from both models:
+
+```{r validation, cache = TRUE}
+
+# Predict values for validation set using RF and GBM models from step 3
+rfValPred <- predict(rfMod, validation)
+gbmValPred <- predict(gbmMod, validation)
+
+# Create dataframe with validation estimates for each model  
+# **note that the column names must be exactly the same as the data that was used to train the ensemble model**
+valDF <- data.frame(rfPredict = rfValPred, gbmPredict= gbmValPred)
+
+# Use combined model to predict values for validation data frame
+validationPredict <- predict(comboMod, valDF)
+
+confusionMatrix(table(validationPredict, validation$classe))
+
+```
+
+---
+
+The combined model achieved 99.18% out of sample accuracy, while the diffence is 
+incredibly slight, it appears that the ensemble model performed worse in terms 
+of out of sample accuracy
+
+## Conclusion
+
+In this post I covered 3 different models which were used to predict the quality of 
+an excercise, based on accelerometer data.  Although I won't post the results 
+of my predictions here (no cheaters!), my model did correctly predict the 
+"classe" of exercise for all 20 of the subjects.  
