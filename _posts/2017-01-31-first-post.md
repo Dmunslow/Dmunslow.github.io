@@ -2,7 +2,7 @@
 layout: post
 title:  "Мой блог. Начало"
 date:   2017-01-31 14:00:00 +0300
-category: life
+category: python
 icon: www
 ---
 <p>Пришло время для первого поста. Это так волнительно :)</p>
