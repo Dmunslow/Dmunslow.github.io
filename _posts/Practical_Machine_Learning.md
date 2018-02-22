@@ -1,3 +1,14 @@
+---
+layout: post
+title:  "Practical Machine Learning with R"
+date:   2018-02-21 23:00
+category: R
+icon: js
+keywords: R, machine learning, caret, coursera
+image: 2.png
+preview: 0
+---
+
 -   [Introduction](#introduction)
 -   [Methodology](#methodology)
 -   [1. Reading and Processing data](#reading-and-processing-data)
