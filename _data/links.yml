@@ -1,9 +1,9 @@
 # blog page sections
 - name: R
-  href: '/ r /'
+  href: '/R/'
   
 - name: Python
-  href: '/python/'
+  href: '/Python/'
   
 - name: Life
   href: '/life/'
