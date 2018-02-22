@@ -2,7 +2,7 @@
 layout: post
 title:  "TESTINGTESTINGTESTING"
 date:   2017-09-08 23:00
-category: r
+category: life
 icon: js
 keywords: codecademy, перевод, курс, javascript
 image: 2.png
