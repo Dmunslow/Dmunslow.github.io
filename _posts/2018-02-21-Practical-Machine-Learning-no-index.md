@@ -3,7 +3,7 @@ layout: post
 title:  "Practical Machine Learning no index"
 date:   2017-09-08 23:00
 category: r
-icon: js
+icon: r-studio-logo
 keywords: codecademy, перевод, курс, javascript
 image: 2.png
 preview: 0
