@@ -1,14 +1,13 @@
 ---
 layout: post
-title:  "Practical Machine Learning with R"
-date:   2018-02-21 23:00
+title:  "TESTINGTESTINGTESTING"
+date:   2017-09-08 23:00
 category: r
 icon: js
-keywords: r, caret, coursera
+keywords: codecademy, перевод, курс, javascript
 image: 2.png
 preview: 0
 ---
-
 -   [Introduction](#introduction)
 -   [Methodology](#methodology)
 -   [1. Reading and Processing data](#reading-and-processing-data)
