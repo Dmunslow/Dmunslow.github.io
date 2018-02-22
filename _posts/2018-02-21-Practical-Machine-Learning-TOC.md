@@ -1,13 +1,14 @@
 ---
 layout: post
-title:  "TESTINGTESTINGTESTING"
+title:  "Practical Machine Learning TOC"
 date:   2017-09-08 23:00
-category: life
+category: r
 icon: js
 keywords: codecademy, перевод, курс, javascript
 image: 2.png
 preview: 0
 ---
+
 -   [Introduction](#introduction)
 -   [Methodology](#methodology)
 -   [1. Reading and Processing data](#reading-and-processing-data)
