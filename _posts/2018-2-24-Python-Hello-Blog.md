@@ -29,5 +29,5 @@ plt.show()
 ```
 
 
-![png](Dmunslow.github.io/_posts/imgages/test_0_0.png)
+![png](Dmunslow.github.io/_posts/images/test_0_0.png)
 
