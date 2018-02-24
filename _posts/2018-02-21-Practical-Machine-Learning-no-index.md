@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Practical Machine Learning no index"
+title:  " Inaugural Blog Post - Practical Machine Learning with R"
 date:   2017-09-08 23:00
 category: r
 icon: rstudio
