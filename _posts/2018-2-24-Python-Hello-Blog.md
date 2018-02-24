@@ -29,5 +29,5 @@ plt.show()
 ```
 
 
-![png](test_files/test_0_0.png)
+![png](2018-2-24-Python-Hello-Blog_files/test_0_0.png)
 
