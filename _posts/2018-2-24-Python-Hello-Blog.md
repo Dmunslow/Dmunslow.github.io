@@ -1,4 +1,12 @@
-
+---
+layout: post
+title:  "Hello Blog - My First Python Post"
+date:   2017-09-08 23:00
+category: python
+icon: python
+keywords: python, numpy, matplotlib
+preview: 0
+---
 
 ```python
 # this is a test page for the blog
