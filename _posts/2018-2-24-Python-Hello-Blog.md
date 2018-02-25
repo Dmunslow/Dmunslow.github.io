@@ -23,11 +23,13 @@ plt.plot(year, numbers)
 # display the plot
 plt.show()
 
+![png](/images/test_0_0.png)
+
 
 ## Authors Note: this documnet was converted from a Jupyter Notebook to markdown, using nbconvert
 
 ```
 
 
-![png](/images/test_0_0.png)
+
 
