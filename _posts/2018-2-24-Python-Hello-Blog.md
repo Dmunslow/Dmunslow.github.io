@@ -29,5 +29,5 @@ plt.show()
 ```
 
 
-![png]({{ site.url }}/images/test_0_0.png)
+![png]( {{ site.url }}/images/test_0_0.png)
 
