@@ -29,5 +29,5 @@ plt.show()
 ```
 
 
-![png](//duncanmunslow.com/_posts/images/test_0_0.png)
+![png](blog.duncanmunslow.com/_posts/images/test_0_0.png)
 
