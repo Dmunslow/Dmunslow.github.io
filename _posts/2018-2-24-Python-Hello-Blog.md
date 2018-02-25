@@ -29,5 +29,5 @@ plt.show()
 ```
 
 
-![png](blog.duncanmunslow.com/_posts/images/test_0_0.png)
+![png]({{ site.baseurl }}/images/test_0_0.png)
 
