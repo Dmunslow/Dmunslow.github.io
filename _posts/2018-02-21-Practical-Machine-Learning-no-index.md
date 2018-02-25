@@ -4,8 +4,7 @@ title:  " Inaugural Blog Post - Practical Machine Learning with R"
 date:   2017-09-08 23:00
 category: r
 icon: rstudio
-keywords: codecademy, перевод, курс, javascript
-image: 2.png
+keywords: r, carret, parallel, machine learning, ensemble method
 preview: 0
 ---
 
