@@ -18,8 +18,8 @@ description: > # this means to ignore newlines until "baseurl:"
  This is my personal blog, where I share side projects that I've worked on, mostly in R, but also some basic projects in python.<br>
   You can find the code for every post on this blog on my <a href="//github.com/Dmunslow/">github</a>.<br>
   <br>
-baseurl: "/Dmunslow.github.io" # the subpath of your site, e.g. /blog
-url: "https://blog.duncanmunslow.com" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "http://blog.duncanmunslow.com" # the base hostname & protocol for your site, e.g. http://example.com
 
 
 author:
