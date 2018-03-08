@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hello Blog - My First Python Post"
-date:   2017-09-08 23:00
+date:   2018-02-24 23:00
 category: python
 icon: python
 keywords: python, numpy, matplotlib
