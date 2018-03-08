@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  " Inaugural Blog Post - Practical Machine Learning with R"
-date:   2017-09-08 23:00
+date:   2018-02-21 23:00
 category: r
 icon: rstudio
 keywords: r, carret, parallel, machine learning, ensemble method
