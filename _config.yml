@@ -36,11 +36,11 @@ author:
 # Build settings
 markdown: kramdown
 
-highlighter: rouge
-
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  
+highlighter: rouge
 
 permalink: /:categories/:year/:title.html
 
