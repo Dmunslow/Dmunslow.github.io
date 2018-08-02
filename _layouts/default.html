@@ -8,6 +8,11 @@
   {% else %}
     <body>
   {% endif %}
+    
+   /* added for code highlighting */   
+  {% if page.use_code %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/rouge-github.css">
+  {% endif %}
 
   <div class="toTop">
     <li class="fa fa-angle-up"></li>  
