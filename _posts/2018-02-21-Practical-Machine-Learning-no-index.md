@@ -406,4 +406,4 @@ The combined model achieved 99.18% out of sample accuracy, while the diffence is
 Conclusion
 ----------
 
-In this post I covered 3 different models which were used to predict the quality of an excercise, based on accelerometer data. Although I won't post the results of my predictions here (no cheaters!), my model did correctly predict the "classe" of exercise for all 20 of the subjects.
+In this post I covered 3 different models which were used to predict the quality of an excercise, based on accelerometer data. Although I won't post the results of my predictions here (no cheaters!) my model did correctly predict the "classe" of exercise for all 20 of the subjects.
