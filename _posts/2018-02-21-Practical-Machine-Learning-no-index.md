@@ -151,7 +151,7 @@ registerDoSEQ()
 3. Random Forest
 ----------------
 
-Although caret allows you to tune your models with various different paremeters, for this project I left all of the settings to default. For those interest in learning about the tuning parameters in caret, and I've found [this paper](https://www.jstatsoft.org/article/view/v028i05/v28i05.pdf) by Max Khun to be especially helpful in understanding some of the basic tuning paremeters for different types of models.
+Although caret allows you to tune your models with various different paremeters, for this project I left all of the settings to default. For those interested in learning about the tuning parameters in caret, and I've found [this paper](https://www.jstatsoft.org/article/view/v028i05/v28i05.pdf) by Max Khun to be especially helpful in understanding some of the basic tuning paremeters for different types of models.
 
 ------------------------------------------------------------------------
 
