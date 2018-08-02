@@ -38,6 +38,9 @@ markdown: kramdown
 
 highlighter: rouge
 
+kramdwon:
+  syntax_highlighter: rouge
+
 permalink: /:categories/:year/:title.html
 
 
