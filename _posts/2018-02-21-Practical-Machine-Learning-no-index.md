@@ -327,7 +327,7 @@ The accuracy for the boosting model on the test set was 99.2%, which leaves both
 
 ------------------------------------------------------------------------
 
-The last model that I will train is a stacked ensemble model. This model will take the predictions of the random forest model and the boosting model, and use only those predictions as features to train on. Practically speaking, this was definitely overkill for this project, but it was something I was very interested in trying. :
+The last model that I will train is a stacked ensemble model. This model will take the predictions of the random forest model and the boosting model, and use only those predictions as features to train on. Practically speaking, this was definitely overkill for this project, but it was something I was very interested in trying. 
 
 ### Creating Combined model
 
