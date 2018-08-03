@@ -30,7 +30,7 @@
 	.highlight .gt { color: #d22323 } /* Generic.Traceback */
 	.highlight .kc { color: #6ab825; font-weight: bold } /* Keyword.Constant */
 	.highlight .kd { color: #6ab825; font-weight: bold } /* Keyword.Declaration */
-	.highlight .kn { color: #6ab825; font-weight: bold } /* Keyword.Namespace */
+	.highlight .kn { color: #ff3030; font-weight: bold } /* Keyword.Namespace */
 	.highlight .kp { color: #6ab825 } /* Keyword.Pseudo */
 	.highlight .kr { color: #6ab825; font-weight: bold } /* Keyword.Reserved */
 	.highlight .kt { color: #6ab825; font-weight: bold } /* Keyword.Type */
