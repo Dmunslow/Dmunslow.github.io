@@ -9,9 +9,9 @@
 	.highlight .k { color: #ff6666; font-weight: bold } /* Keyword */
 	.highlight .l { color: #ffffff } /* Literal */
 	.highlight .n { color: #ffffff } /* Name */
-	.highlight .o { color: #d0d0d0 } /* Operator */
+	.highlight .o { color: #a3fffa } /* Operator */
 	.highlight .x { color: #d0d0d0 } /* Other */
-	.highlight .p { color: #d0d0d0 } /* Punctuation */
+	.highlight .p { color: #a3fffa } /* Punctuation */
 	.highlight .ch { color: #999999; font-style: italic } /* Comment.Hashbang */
 	.highlight .cm { color: #999999; font-style: italic } /* Comment.Multiline */
 	.highlight .cp { color: #cd2828; font-weight: bold } /* Comment.Preproc */
