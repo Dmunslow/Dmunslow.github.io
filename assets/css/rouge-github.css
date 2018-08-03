@@ -2,7 +2,7 @@
 .highlight table pre { margin: 0; }
 .highlight .hll { background-color: #404040 }
 	.highlight  { background: #202020; color: #d0d0d0 }
-	.highlight .c { color: #999999; font-style: italic } /* Comment */
+	.highlight .c { color: #2ebaae; font-style: italic } /* Comment */
 	.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 	.highlight .esc { color: #d0d0d0 } /* Escape */
 	.highlight .g { color: #d0d0d0 } /* Generic */
@@ -56,7 +56,7 @@
 	.highlight .mb { color: #3677a9 } /* Literal.Number.Bin */
 	.highlight .mf { color: #3677a9 } /* Literal.Number.Float */
 	.highlight .mh { color: #3677a9 } /* Literal.Number.Hex */
-	.highlight .mi { color: #3677a9 } /* Literal.Number.Integer */
+	.highlight .mi { color: #ff8300 } /* Literal.Number.Integer */
 	.highlight .mo { color: #3677a9 } /* Literal.Number.Oct */
 	.highlight .sa { color: #ed9d13 } /* Literal.String.Affix */
 	.highlight .sb { color: #ed9d13 } /* Literal.String.Backtick */
