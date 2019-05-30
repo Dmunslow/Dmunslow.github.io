@@ -42,6 +42,11 @@ kramdown:
   
 highlighter: rouge
 
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+
 permalink: /:categories/:year/:title.html
 
 
