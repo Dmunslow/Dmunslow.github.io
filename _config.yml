@@ -47,6 +47,10 @@ plugins:
   - jekyll-feed
   - jemoji
 
+feed:
+  categories:
+    - R
+
 permalink: /:categories/:year/:title.html
 
 
