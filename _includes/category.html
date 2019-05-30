@@ -1,8 +1,8 @@
 <!-- categories.html -->
 
-{% assign category = page.url | remove:'/' %} <!-- category - переменная из адреса сайта -->
+{% assign post_category = page.url | remove:'/' %} <!-- category - переменная из адреса сайта -->
     <header>
-        <h1 class="cat-header" style="text-align: center;">{{category}}</h1>
+        <h1 class="cat-header" style="text-align: center;">{{post_category}}</h1>
     </header>
 
     <style>
@@ -20,7 +20,7 @@
 
 <section>
     <ul class="posts">
-    	{% for post in site.categories.[category] %}
+    	{% for post in site.categories.[post_category] %}
     	<li>
     		<article>
     			<header>
