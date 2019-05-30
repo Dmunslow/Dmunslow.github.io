@@ -3,7 +3,7 @@ layout: post
 title:  "Hello Blog - My First Python Post"
 date:   2018-02-24 23:00
 use_code: true
-category: python
+post_category: python
 icon: python
 keywords: python, numpy, matplotlib
 preview: 0
