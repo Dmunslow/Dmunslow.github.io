@@ -45,7 +45,7 @@ highlighter: rouge
 plugins:
   - jekyll-sitemap
   - jekyll-feed
-
+  - jemoji
 
 permalink: /:categories/:year/:title.html
 
