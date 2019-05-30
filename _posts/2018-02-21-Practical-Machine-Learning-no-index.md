@@ -3,7 +3,7 @@ layout: post
 title:  " Inaugural Blog Post - Practical Machine Learning with R"
 date:   2018-02-21 23:00
 use_code: true
-category: r
+categories: R
 icon: rstudio
 keywords: r, carret, parallel, machine learning, ensemble method
 preview: 0
