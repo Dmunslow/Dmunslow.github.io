@@ -19,6 +19,8 @@
   {% if page.use_code %}
     <link rel="stylesheet" href="{{ "/assets/css/rouge-github.css" | relative_url }}">
   {% endif %}
+  
+  {% feed_meta %}
 
   <script src="{{"/assets/js/jquery.min.js" | prepend: site.baseurl}}"></script>
 </head>
